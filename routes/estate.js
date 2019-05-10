@@ -231,7 +231,7 @@ const getNewRecommend = function () {
                 'price': '@float(5000, 12000)',
                 'floor': '@int(3, 50)',
                 'floorList': '1,2,3,4',
-                'houseType|5': [{
+                'houseType|2-8': [{
                     'id': '@id',
                     'area': '@float(60, 200)',
                     'price': '@float(800, 2500)',
