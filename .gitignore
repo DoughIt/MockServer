@@ -1,3 +1,6 @@
+# visual studio code 自动创建
+.vscode
+
 # Logs
 logs
 *.log
