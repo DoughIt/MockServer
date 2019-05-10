@@ -380,10 +380,12 @@ router.get('/new', function (req, res, next) {
         step,
         page
     } = req.query;
+    let newPage = page == undefined ? 1 : page;
+    newPage++;
     res.json(getNewRecommend(district == undefined ? '@district' : district,
         road == undefined ? '@road' : road,
         recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/new?district=' + district + '&road=' + road + '&step=10' :
+        'http://duo.darkyoung.cn:8888/api/estate/new?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
         'http://duo.darkyoung.cn:8888/api/estate/new?recommend=true&step=10'));
 });
 router.get('/second', function (req, res, next) {
@@ -394,12 +396,13 @@ router.get('/second', function (req, res, next) {
         step,
         page
     } = req.query;
-
+    let newPage = page == undefined ? 1 : page;
+    newPage++;
     res.json(getSecondRecommend(district == undefined ? '@district' : district,
-        road == undefined ? '@road' : road,
-        recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10' :
-        'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
+            road == undefined ? '@road' : road,
+            recommend == undefined ?
+            'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10&page=' + newPage:
+            'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
 });
 router.get('/rent', function (req, res, next) {
     const {
@@ -409,11 +412,13 @@ router.get('/rent', function (req, res, next) {
         step,
         page
     } = req.query;
+    let newPage = page == undefined ? 1 : page;
+    newPage++;
     res.json(getRentRecommend(district == undefined ? '@district' : district,
-        road == undefined ? '@road' : road,
-        recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10' :
-        'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
+            road == undefined ? '@road' : road,
+            recommend == undefined ?
+            'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10&page=' + newPage  :
+            'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
 });
 
 module.exports = router;
