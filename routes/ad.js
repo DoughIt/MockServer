@@ -4,9 +4,22 @@ const Mock = require('mockjs');
 const random = Mock.Random;
 const adImages = ['photos/1449081/pexels-photo-1449081.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     'photos/1166430/pexels-photo-1166430.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-
+    'photos/945688/pexels-photo-945688.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/447592/pexels-photo-447592.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/277630/pexels-photo-277630.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/1571471/pexels-photo-1571471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/257344/pexels-photo-257344.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/276528/pexels-photo-276528.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/97075/pexels-photo-97075.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/279810/pexels-photo-279810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/615350/keys-shelf-keychain-lock-615350.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/256738/pexels-photo-256738.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'photos/1260312/pexels-photo-1260312.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
 ];
 
+const tags = ['门业', '装修', '超市', '小卖部', '批发', '维修', '物业'];
 const categories = ['HOME', 'DISCOVER'];
 
 random.extend({
@@ -15,6 +28,9 @@ random.extend({
     },
     category: function () {
         return this.pick(categories);
+    },
+    adTag: function () {
+        return this.pick(tags);
     }
 });
 const getHome = function () {
@@ -42,7 +58,7 @@ const getHome = function () {
                 },
                 'tagList|1-6': [{
                     'id': '@id',
-                    'name': '@ctitle(2, 5)'
+                    'name': '@adTag'
                 }],
                 'imgList|2-5': [{
                     'url': '@adImage'
@@ -77,7 +93,7 @@ const getDiscover = function () {
                 },
                 'tagList|1-6': [{
                     'id': '@id',
-                    'name': '@ctitle(2, 5)'
+                    'name': '@adTag'
                 }],
                 'imgList|2-5': [{
                     'url': '@adImage'
@@ -108,7 +124,7 @@ const getAdInfo = function (id) {
             },
             'tagList|1-6': [{
                 'id': '@id',
-                'name': '@ctitle(2, 5)'
+                'name': '@adTag'
             }],
             'imgList|2-5': [{
                 'url': '@adImage'

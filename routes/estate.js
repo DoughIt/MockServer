@@ -24,6 +24,11 @@ const otherImages = ['photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=ti
     'photos/2098443/pexels-photo-2098443.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     'photos/208736/pexels-photo-208736.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
 ];
+const tags = ['电梯', '有车位', '出行方便', '近地铁', '公交站', '学校附近',
+    '低楼层', '中高楼层', '高楼层', '普通装修', '高档装修', '家电齐全', '独立厨卫',
+    '拎包入住', '市中心', '靠近市中心', '高绿化'
+];
+
 random.extend({
     district: function () {
         return this.pick(districts);
@@ -42,6 +47,9 @@ random.extend({
     },
     otherImage: function () {
         return this.pick(otherImages);
+    },
+    tag: function () {
+        return this.pick(tags);
     }
 });
 const getNewEstateInfo = function (id) {
@@ -70,9 +78,9 @@ const getNewEstateInfo = function (id) {
             'cover': {
                 'url': '@newImage'
             },
-            'tagList|6': [{
+            'tagList|1-6': [{
                 'id': '@id',
-                'name': '@ctitle(2, 5)'
+                'name': '@tag'
             }],
             'imgList|6': [{
                 'url': '@newImage'
@@ -83,7 +91,7 @@ const getNewEstateInfo = function (id) {
             'price': '@float(5000, 12000)',
             'floor': '@int(3, 50)',
             'floorList': '1,2,3,4',
-            'houseType|5': [{
+            'houseType|2-8': [{
                 'id': '@id',
                 'area': '@float(60, 200)',
                 'price': '@float(800, 2500)',
@@ -122,9 +130,9 @@ const getSecondEstateInfo = function (id) {
             'cover': {
                 'url': '@otherImage'
             },
-            'tagList|6': [{
+            'tagList|1-5': [{
                 'id': '@id',
-                'name': '@ctitle(2, 5)'
+                'name': '@tag'
             }],
             'imgList|6': [{
                 'url': '@otherImage'
@@ -168,9 +176,9 @@ const getRentEstateInfo = function (id) {
             'cover': {
                 'url': '@otherImage'
             },
-            'tagList|6': [{
+            'tagList|1-6': [{
                 'id': '@id',
-                'name': '@ctitle(2, 5)'
+                'name': '@tag'
             }],
             'imgList|6': [{
                 'url': '@otherImage'
@@ -218,9 +226,9 @@ const getNewRecommend = function () {
                 'cover': {
                     'url': '@newImage'
                 },
-                'tagList|6': [{
+                'tagList|1-5': [{
                     'id': '@id',
-                    'name': '@ctitle(2, 5)'
+                    'name': '@tag'
                 }],
                 'imgList|6': [{
                     'url': '@newImage'
@@ -274,9 +282,9 @@ const getSecondRecommend = function () {
                 'cover': {
                     'url': '@otherImage'
                 },
-                'tagList|6': [{
+                'tagList|1-5': [{
                     'id': '@id',
-                    'name': '@ctitle(2, 5)'
+                    'name': '@tag'
                 }],
                 'imgList|6': [{
                     'url': '@otherImage'
@@ -324,9 +332,9 @@ const getRentRecommend = function () {
                 'cover': {
                     'url': '@otherImage'
                 },
-                'tagList|6': [{
+                'tagList|1-5': [{
                     'id': '@id',
-                    'name': '@ctitle(2, 5)'
+                    'name': '@tag'
                 }],
                 'imgList|6': [{
                     'url': '@otherImage'
