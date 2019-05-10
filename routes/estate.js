@@ -196,11 +196,11 @@ const getRentEstateInfo = function (id) {
     });
 }
 
-const getNewRecommend = function () {
+const getNewRecommend = function (district, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
-        'nextPageUrl': 'http://duo.darkyoung.cn:8888/api/estate/new?recommend=true&step=10',
+        'nextPageUrl': nextPageUrl,
         'itemList|10': [{
             'type': '房源',
             'data': {
@@ -209,8 +209,8 @@ const getNewRecommend = function () {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': '@district',
-                    'road': '@road',
+                    'district': district,
+                    'road': road,
                     'community': '@community',
                     'building': '@building',
                     'floor': '@int(0, 50)',
@@ -252,11 +252,11 @@ const getNewRecommend = function () {
         }]
     });
 }
-const getSecondRecommend = function () {
+const getSecondRecommend = function (district, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
-        'nextPageUrl': 'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10',
+        'nextPageUrl': nextPageUrl,
         'itemList|10': [{
             'type': '房源',
             'data': {
@@ -265,8 +265,8 @@ const getSecondRecommend = function () {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': '@district',
-                    'road': '@road',
+                    'district': district,
+                    'road': road,
                     'community': '@community',
                     'building': '@building',
                     'floor': '@int(0, 50)',
@@ -302,11 +302,11 @@ const getSecondRecommend = function () {
         }]
     });
 }
-const getRentRecommend = function () {
+const getRentRecommend = function (district, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
-        'nextPageUrl': 'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10',
+        'nextPageUrl': nextPageUrl,
         'itemList|10': [{
             'type': '房源',
             'data': {
@@ -315,8 +315,8 @@ const getRentRecommend = function () {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': '@district',
-                    'road': '@road',
+                    'district': district,
+                    'road': road,
                     'community': '@community',
                     'building': '@building',
                     'floor': '@int(0, 50)',
@@ -373,12 +373,47 @@ router.get('/rent/:id', function (req, res, next) {
     res.json(getRentEstateInfo(id));
 });
 router.get('/new', function (req, res, next) {
-    res.json(getNewRecommend());
+    const {
+        recommend,
+        district,
+        road,
+        step,
+        page
+    } = req.query;
+    res.json(getNewRecommend(district == undefined ? '@district' : district,
+        road == undefined ? '@road' : road,
+        recommend == undefined ?
+        'http://duo.darkyoung.cn:8888/api/estate/new?district=' + district + '&road=' + road + '&step=10' :
+        'http://duo.darkyoung.cn:8888/api/estate/new?recommend=true&step=10'));
 });
 router.get('/second', function (req, res, next) {
-    res.json(getSecondRecommend());
+    const {
+        recommend,
+        district,
+        road,
+        step,
+        page
+    } = req.query;
+
+    res.json(getSecondRecommend(district == undefined ? '@district' : district,
+        road == undefined ? '@road' : road,
+        recommend == undefined ?
+        'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10' :
+        'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
 });
 router.get('/rent', function (req, res, next) {
-    res.json(getRentRecommend());
+    const {
+        recommend,
+        district,
+        road,
+        step,
+        page
+    } = req.query;
+    res.json(getRentRecommend(district == undefined ? '@district' : district,
+        road == undefined ? '@road' : road,
+        recommend == undefined ?
+        'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10' :
+        'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
 });
+
 module.exports = router;
