@@ -18,7 +18,7 @@ const getUserInfo = (phoneNumber) => {
       'phoneNumber': phoneNumber,
       'gender': '@gender',
       'avatar': 'user/avatars/3434.jpg',
-      'groupId': 2,
+      'groupId': '@int(1, 2)',
       'provider': {
         'id': '@id',
         'permission': '@int(0,1)',
