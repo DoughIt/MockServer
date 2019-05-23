@@ -4,7 +4,7 @@ const Mock = require('mockjs');
 const random = Mock.Random;
 random.extend({
   gender: function () {
-    const genders = ['男', '女', '其他', '保密'];
+    const genders = ['男', '女', '保密'];
     return this.pick(genders);
   }
 });
