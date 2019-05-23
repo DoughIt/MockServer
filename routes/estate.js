@@ -76,6 +76,7 @@ const getNewEstateInfo = function (id) {
                 'icon': '@image'
             },
             'cover': {
+                'id': '@id',
                 'url': '@newImage'
             },
             'tagList|1-6': [{
@@ -83,6 +84,7 @@ const getNewEstateInfo = function (id) {
                 'name': '@tag'
             }],
             'imgList|6': [{
+                'id': '@id',
                 'url': '@newImage'
             }],
             'alias': '@building',
@@ -99,7 +101,8 @@ const getNewEstateInfo = function (id) {
                 'hallNumber': '@int(0, 3)',
                 'toiletNumber': '@int(0, 5)',
                 'detail': '@paragraph(1, 4)'
-            }]
+            }],
+            'elseInfo': '@paragraph(1, 4)'
         }
     });
 };
@@ -128,6 +131,7 @@ const getSecondEstateInfo = function (id) {
                 'icon': '@image'
             },
             'cover': {
+                'id': '@id',
                 'url': '@otherImage'
             },
             'tagList|1-5': [{
@@ -135,6 +139,7 @@ const getSecondEstateInfo = function (id) {
                 'name': '@tag'
             }],
             'imgList|6': [{
+                'id': '@id',
                 'url': '@otherImage'
             }],
             'houseType': {
@@ -145,7 +150,8 @@ const getSecondEstateInfo = function (id) {
                 'hallNumber': '@int(0, 3)',
                 'toiletNumber': '@int(0, 5)',
                 'detail': '@paragraph(1, 4)'
-            }
+            },
+            'elseInfo': '@paragraph(1, 4)'
         }
     });
 }
@@ -174,6 +180,7 @@ const getRentEstateInfo = function (id) {
                 'icon': '@image'
             },
             'cover': {
+                'id': '@id',
                 'url': '@otherImage'
             },
             'tagList|1-6': [{
@@ -181,6 +188,7 @@ const getRentEstateInfo = function (id) {
                 'name': '@tag'
             }],
             'imgList|6': [{
+                'id': '@id',
                 'url': '@otherImage'
             }],
             'houseType': {
@@ -191,7 +199,8 @@ const getRentEstateInfo = function (id) {
                 'hallNumber': '@int(0, 3)',
                 'toiletNumber': '@int(0, 5)',
                 'detail': '@paragraph(1, 4)'
-            }
+            },
+            'elseInfo': '@paragraph(1, 4)'
         }
     });
 }
@@ -224,6 +233,7 @@ const getNewRecommend = function (district, road, nextPageUrl) {
                     'icon': '@image'
                 },
                 'cover': {
+                    'id': '@id',
                     'url': '@newImage'
                 },
                 'tagList|1-5': [{
@@ -231,6 +241,7 @@ const getNewRecommend = function (district, road, nextPageUrl) {
                     'name': '@tag'
                 }],
                 'imgList|6': [{
+                    'id': '@id',
                     'url': '@newImage'
                 }],
                 'alias': '@building',
@@ -247,7 +258,8 @@ const getNewRecommend = function (district, road, nextPageUrl) {
                     'hallNumber': '@int(0, 3)',
                     'toiletNumber': '@int(0, 5)',
                     'detail': '@paragraph(1, 4)'
-                }]
+                }],
+                'elseInfo': '@paragraph(1, 4)'
             }
         }]
     });
@@ -280,6 +292,7 @@ const getSecondRecommend = function (district, road, nextPageUrl) {
                     'icon': '@image'
                 },
                 'cover': {
+                    'id': '@id',
                     'url': '@otherImage'
                 },
                 'tagList|1-5': [{
@@ -287,6 +300,7 @@ const getSecondRecommend = function (district, road, nextPageUrl) {
                     'name': '@tag'
                 }],
                 'imgList|6': [{
+                    'id': '@id',
                     'url': '@otherImage'
                 }],
                 'houseType': {
@@ -297,7 +311,8 @@ const getSecondRecommend = function (district, road, nextPageUrl) {
                     'hallNumber': '@int(0, 3)',
                     'toiletNumber': '@int(0, 5)',
                     'detail': '@paragraph(1, 4)'
-                }
+                },
+                'elseInfo': '@paragraph(1, 4)'
             }
         }]
     });
@@ -330,6 +345,7 @@ const getRentRecommend = function (district, road, nextPageUrl) {
                     'icon': '@image'
                 },
                 'cover': {
+                    'id': '@id',
                     'url': '@otherImage'
                 },
                 'tagList|1-5': [{
@@ -337,6 +353,7 @@ const getRentRecommend = function (district, road, nextPageUrl) {
                     'name': '@tag'
                 }],
                 'imgList|6': [{
+                    'id': '@id',
                     'url': '@otherImage'
                 }],
                 'houseType': {
@@ -347,7 +364,8 @@ const getRentRecommend = function (district, road, nextPageUrl) {
                     'hallNumber': '@int(0, 3)',
                     'toiletNumber': '@int(0, 5)',
                     'detail': '@paragraph(1, 4)'
-                }
+                },
+                'elseInfo': '@paragraph(1, 4)'
             }
         }]
     });
@@ -399,10 +417,10 @@ router.get('/second', function (req, res, next) {
     let newPage = page == undefined ? 1 : page;
     newPage++;
     res.json(getSecondRecommend(district == undefined ? '@district' : district,
-            road == undefined ? '@road' : road,
-            recommend == undefined ?
-            'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10&page=' + newPage:
-            'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
+        road == undefined ? '@road' : road,
+        recommend == undefined ?
+        'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
+        'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
 });
 router.get('/rent', function (req, res, next) {
     const {
@@ -415,10 +433,17 @@ router.get('/rent', function (req, res, next) {
     let newPage = page == undefined ? 1 : page;
     newPage++;
     res.json(getRentRecommend(district == undefined ? '@district' : district,
-            road == undefined ? '@road' : road,
-            recommend == undefined ?
-            'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10&page=' + newPage  :
-            'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
+        road == undefined ? '@road' : road,
+        recommend == undefined ?
+        'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
+        'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
 });
 
+router.get('/rent/:id/image/:img_id', function (req, res, next) {
+    const {
+        id,
+        img_id
+    } = req.params;
+    res.send("id = " + id + " img_id = " + img_id);
+});
 module.exports = router;
