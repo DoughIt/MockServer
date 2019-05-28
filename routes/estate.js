@@ -4,7 +4,7 @@ const Mock = require('mockjs');
 const random = Mock.Random;
 const districts = ['静安区', '虹口区', '宝山区', '闸北区', '闵行区', '嘉定区', '浦东新区', '青浦区', '杨浦区', '松江区', '金山区', '奉贤区', '普陀区', '黄浦区', '崇明区', '徐汇区', '长宁区'];
 const roads = ['蔡伦路', '博华路', '龙阳路', '芳华路', '高科路', '花木路', '陈春路', '张衡路', '海科路', '金科路', '高科中路', '碧波路', '中科路', '学林路', '康桥路'];
-const communities = ['张江高科技园区'];
+const communities = ['张江高科技园区', '锦绣满堂花园', '如意佳园', '旭辉公元城市'];
 const buildings = ['高科苑四号楼'];
 const newImages = ['photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     'photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -205,7 +205,7 @@ const getRentEstateInfo = function (id) {
     });
 }
 
-const getNewRecommend = function (district, road, nextPageUrl) {
+const getNewRecommend = function (community, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -218,9 +218,9 @@ const getNewRecommend = function (district, road, nextPageUrl) {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': district,
+                    'district': '@district',
                     'road': road,
-                    'community': '@community',
+                    'community': community,
                     'building': '@building',
                     'floor': '@int(0, 50)',
                     'room': '@character@int(100, 110)'
@@ -264,7 +264,7 @@ const getNewRecommend = function (district, road, nextPageUrl) {
         }]
     });
 }
-const getSecondRecommend = function (district, road, nextPageUrl) {
+const getSecondRecommend = function (community, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -277,9 +277,9 @@ const getSecondRecommend = function (district, road, nextPageUrl) {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': district,
+                    'district': '@district',
                     'road': road,
-                    'community': '@community',
+                    'community': community,
                     'building': '@building',
                     'floor': '@int(0, 50)',
                     'room': '@character@int(100, 110)'
@@ -317,7 +317,7 @@ const getSecondRecommend = function (district, road, nextPageUrl) {
         }]
     });
 }
-const getRentRecommend = function (district, road, nextPageUrl) {
+const getRentRecommend = function (community, road, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -330,9 +330,9 @@ const getRentRecommend = function (district, road, nextPageUrl) {
                 'location': {
                     'country': '中国',
                     'city': '@city',
-                    'district': district,
+                    'district': '@district',
                     'road': road,
-                    'community': '@community',
+                    'community': community,
                     'building': '@building',
                     'floor': '@int(0, 50)',
                     'room': '@character@int(100, 110)'
@@ -393,49 +393,49 @@ router.get('/rent/:id', function (req, res, next) {
 router.get('/new', function (req, res, next) {
     const {
         recommend,
-        district,
+        community,
         road,
         step,
         page
     } = req.query;
     let newPage = page == undefined ? 1 : page;
     newPage++;
-    res.json(getNewRecommend(district == undefined ? '@district' : district,
+    res.json(getNewRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
         recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/new?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
+        'http://duo.darkyoung.cn:8888/api/estate/new?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
         'http://duo.darkyoung.cn:8888/api/estate/new?recommend=true&step=10'));
 });
 router.get('/second', function (req, res, next) {
     const {
         recommend,
-        district,
+        community,
         road,
         step,
         page
     } = req.query;
     let newPage = page == undefined ? 1 : page;
     newPage++;
-    res.json(getSecondRecommend(district == undefined ? '@district' : district,
+    res.json(getSecondRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
         recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/second?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
+        'http://duo.darkyoung.cn:8888/api/estate/second?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
         'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
 });
 router.get('/rent', function (req, res, next) {
     const {
         recommend,
-        district,
+        community,
         road,
         step,
         page
     } = req.query;
     let newPage = page == undefined ? 1 : page;
     newPage++;
-    res.json(getRentRecommend(district == undefined ? '@district' : district,
+    res.json(getRentRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
         recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/rent?district=' + district + '&road=' + road + '&step=10&page=' + newPage :
+        'http://duo.darkyoung.cn:8888/api/estate/rent?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
         'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
 });
 
@@ -444,6 +444,6 @@ router.get('/rent/:id/image/:img_id', function (req, res, next) {
         id,
         img_id
     } = req.params;
-    res.send("id = " + id + " img_id = " + img_id);
+    res.send('id = ' + id + ' img_id = ' + img_id);
 });
 module.exports = router;
