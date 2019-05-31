@@ -446,4 +446,5 @@ router.get('/rent/:id/image/:img_id', function (req, res, next) {
     } = req.params;
     res.send('id = ' + id + ' img_id = ' + img_id);
 });
+
 module.exports = router;

@@ -140,7 +140,7 @@ router.get('/discover', function (req, res, next) {
     res.json(getDiscover());
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/detail/:id', function (req, res, next) {
     const {
         id
     } = req.params;
