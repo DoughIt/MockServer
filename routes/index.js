@@ -18,7 +18,6 @@ const getCommunityRoadInfo = function () {
     'errorCode': 0,
     'message': '成功',
     'itemList|20-40': [{
-      'id': '@id',
       'community': '@community',
       'road': '@road'
     }]
