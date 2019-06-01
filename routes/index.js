@@ -33,4 +33,20 @@ router.get('/', function (req, res, next) {
 router.get('/api/community_road', function (req, res, next) {
   res.json(getCommunityRoadInfo());
 });
+
+router.get('part_a/info/:id', function (req, res, next) {
+  const {
+    id
+  } = req.params;
+  res.json(Mock.mock({
+    'errorCode': 0,
+    'message': '成功',
+    'data': {
+      'partAId': id,
+      'name': '@cname',
+      'weChatId': 'wx_id_@id',
+      'phoneNumber': '18717723912'
+    }
+  }));
+});
 module.exports = router;
