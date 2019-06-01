@@ -413,7 +413,8 @@ router.get('/new', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        let newPage = page + 1;
+        let newPage = page;
+        newPage++;
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
@@ -445,7 +446,8 @@ router.get('/second', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        let newPage = page + 1;
+        let newPage = page;
+        newPage++;
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
@@ -478,7 +480,8 @@ router.get('/rent', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        let newPage = page + 1;
+        let newPage = page;
+        newPage++;
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
