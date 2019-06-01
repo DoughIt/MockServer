@@ -418,8 +418,8 @@ router.get('/new', function (req, res, next) {
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
-    res.json(getNewRecommend(community == undefined ? '@community' : community,
-        road == undefined ? '@road' : road,
+    res.json(getNewRecommend((community == undefined || community == "") ? '@community' : community,
+        (road == undefined || road == "") ? '@road' : road,
         partner_id == undefined ? '@id' : partner_id,
         nextPageUrl));
 });
@@ -451,8 +451,8 @@ router.get('/second', function (req, res, next) {
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
-    res.json(getSecondRecommend(community == undefined ? '@community' : community,
-        road == undefined ? '@road' : road,
+    res.json(getSecondRecommend((community == undefined || community == "") ? '@community' : community,
+        (road == undefined || road == "") ? '@road' : road,
         partner_id == undefined ? '@id' : partner_id,
         nextPageUrl));
 });
@@ -485,8 +485,8 @@ router.get('/rent', function (req, res, next) {
         nextPageUrl += "page=" + newPage + "&";
     }
     nextPageUrl += "step=" + step;
-    res.json(getRentRecommend(community == undefined ? '@community' : community,
-        road == undefined ? '@road' : road,
+    res.json(getRentRecommend((community == undefined || community == "") ? '@community' : community,
+        (road == undefined || road == "") ? '@road' : road,
         partner_id == undefined ? '@id' : partner_id,
         nextPageUrl));
 });
