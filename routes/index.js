@@ -34,7 +34,7 @@ router.get('/api/community_road', function (req, res, next) {
   res.json(getCommunityRoadInfo());
 });
 
-router.get('/api/part_a/info/:id', function (req, res, next) {
+router.post('/api/part_a/info/:id', function (req, res, next) {
   const {
     id
   } = req.params;
