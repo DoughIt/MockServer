@@ -205,7 +205,7 @@ const getRentEstateInfo = function (id) {
     });
 }
 
-const getNewRecommend = function (community, road, nextPageUrl) {
+const getNewRecommend = function (community, road, partner_id, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -226,7 +226,7 @@ const getNewRecommend = function (community, road, nextPageUrl) {
                     'room': '@character@int(100, 110)'
                 },
                 'provider': {
-                    'id': '@id',
+                    'id': partner_id,
                     'permission': '@int(0,1)',
                     'name': '@cname',
                     'company': '多多房产',
@@ -264,7 +264,7 @@ const getNewRecommend = function (community, road, nextPageUrl) {
         }]
     });
 }
-const getSecondRecommend = function (community, road, nextPageUrl) {
+const getSecondRecommend = function (community, road, partner_id, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -285,7 +285,7 @@ const getSecondRecommend = function (community, road, nextPageUrl) {
                     'room': '@character@int(100, 110)'
                 },
                 'provider': {
-                    'id': '@id',
+                    'id': partner_id,
                     'permission': '@int(0,1)',
                     'name': '@cname',
                     'company': '多多房产',
@@ -317,7 +317,7 @@ const getSecondRecommend = function (community, road, nextPageUrl) {
         }]
     });
 }
-const getRentRecommend = function (community, road, nextPageUrl) {
+const getRentRecommend = function (community, road, partner_id, nextPageUrl) {
     return Mock.mock({
         'errorCode': 0,
         'count': 10,
@@ -338,7 +338,7 @@ const getRentRecommend = function (community, road, nextPageUrl) {
                     'room': '@character@int(100, 110)'
                 },
                 'provider': {
-                    'id': '@id',
+                    'id': partner_id,
                     'permission': '@int(0,1)',
                     'name': '@cname',
                     'company': '多多房产',
@@ -396,15 +396,30 @@ router.get('/new', function (req, res, next) {
         community,
         road,
         step,
-        page
+        page,
+        partner_id
     } = req.query;
-    let newPage = page == undefined ? 1 : page;
-    newPage++;
+    let nextPageUrl = 'http://duo.darkyoung.cn:8888/api/estate/new?';
+    if (recommend != undefined) {
+        nextPageUrl += "recommend=true&";
+    }
+    if (partner_id != undefined) {
+        nextPageUrl += "partner_id=" + partner_id + "&";
+    }
+    if (community != undefined) {
+        nextPageUrl += "community=" + community + "&";
+    }
+    if (road != undefined) {
+        nextPageUrl += "road=" + road + "&";
+    }
+    if (page != undefined) {
+        nextPageUrl += "page=" + (++page) + "&";
+    }
+    nextPageUrl += "step=" + step;
     res.json(getNewRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
-        recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/new?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
-        'http://duo.darkyoung.cn:8888/api/estate/new?recommend=true&step=10'));
+        partner_id == undefined ? '@id' : partner_id,
+        nextPageUrl));
 });
 router.get('/second', function (req, res, next) {
     const {
@@ -412,31 +427,62 @@ router.get('/second', function (req, res, next) {
         community,
         road,
         step,
-        page
+        page,
+        partner_id
     } = req.query;
-    let newPage = page == undefined ? 1 : page;
-    newPage++;
+    let nextPageUrl = 'http://duo.darkyoung.cn:8888/api/estate/second?';
+    if (recommend != undefined) {
+        nextPageUrl += "recommend=true&";
+    }
+    if (partner_id != undefined) {
+        nextPageUrl += "partner_id=" + partner_id + "&";
+    }
+    if (community != undefined) {
+        nextPageUrl += "community=" + community + "&";
+    }
+    if (road != undefined) {
+        nextPageUrl += "road=" + road + "&";
+    }
+    if (page != undefined) {
+        nextPageUrl += "page=" + (++page) + "&";
+    }
+    nextPageUrl += "step=" + step;
     res.json(getSecondRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
-        recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/second?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
-        'http://duo.darkyoung.cn:8888/api/estate/second?recommend=true&step=10'));
+        partner_id == undefined ? '@id' : partner_id,
+        nextPageUrl));
 });
+
 router.get('/rent', function (req, res, next) {
     const {
         recommend,
         community,
         road,
         step,
-        page
+        page,
+        partner_id
     } = req.query;
-    let newPage = page == undefined ? 1 : page;
-    newPage++;
+    let nextPageUrl = 'http://duo.darkyoung.cn:8888/api/estate/rent?';
+    if (recommend != undefined) {
+        nextPageUrl += "recommend=true&";
+    }
+    if (partner_id != undefined) {
+        nextPageUrl += "partner_id=" + partner_id + "&";
+    }
+    if (community != undefined) {
+        nextPageUrl += "community=" + community + "&";
+    }
+    if (road != undefined) {
+        nextPageUrl += "road=" + road + "&";
+    }
+    if (page != undefined) {
+        nextPageUrl += "page=" + (++page) + "&";
+    }
+    nextPageUrl += "step=" + step;
     res.json(getRentRecommend(community == undefined ? '@community' : community,
         road == undefined ? '@road' : road,
-        recommend == undefined ?
-        'http://duo.darkyoung.cn:8888/api/estate/rent?community=' + community + '&road=' + road + '&step=10&page=' + newPage :
-        'http://duo.darkyoung.cn:8888/api/estate/rent?recommend=true&step=10'));
+        partner_id == undefined ? '@id' : partner_id,
+        nextPageUrl));
 });
 
 router.get('/rent/:id/image/:img_id', function (req, res, next) {
