@@ -413,7 +413,7 @@ router.get('/new', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        nextPageUrl += "page=" + (++page) + "&";
+        nextPageUrl += "page=" + (page + 1) + "&";
     }
     nextPageUrl += "step=" + step;
     res.json(getNewRecommend(community == undefined ? '@community' : community,
@@ -444,7 +444,7 @@ router.get('/second', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        nextPageUrl += "page=" + (++page) + "&";
+        nextPageUrl += "page=" + (page + 1) + "&";
     }
     nextPageUrl += "step=" + step;
     res.json(getSecondRecommend(community == undefined ? '@community' : community,
@@ -476,7 +476,7 @@ router.get('/rent', function (req, res, next) {
         nextPageUrl += "road=" + road + "&";
     }
     if (page != undefined) {
-        nextPageUrl += "page=" + (++page) + "&";
+        nextPageUrl += "page=" + (page + 1) + "&";
     }
     nextPageUrl += "step=" + step;
     res.json(getRentRecommend(community == undefined ? '@community' : community,
