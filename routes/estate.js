@@ -447,4 +447,91 @@ router.get('/rent/:id/image/:img_id', function (req, res, next) {
     res.send('id = ' + id + ' img_id = ' + img_id);
 });
 
+
+router.post('/:category', function (req, res, next) {
+    const {
+        category
+    } = req.params;
+    res.json(Mock.mock({
+        'errorCode': 0,
+        'message': 'success',
+        'data': {
+            'id': '@id',
+            'category': getCategory(category)
+        }
+    }));
+});
+
+router.put('/:category/:id/image/:img_id', function (req, res, next) {
+    const {
+        category,
+        id,
+        img_id
+    } = req.params;
+    res.json(Mock.mock({
+        'errorCode': 0,
+        'message': 'success',
+        'data': {
+            'id': id,
+            'category': getCategory(category)
+        }
+    }));
+});
+
+router.put('/:category/:id/house_type', function (req, res, next) {
+    const {
+        category,
+        id
+    } = req.params;
+    res.json(Mock.mock({
+        'errorCode': 0,
+        'message': 'success',
+        'data': {
+            'id': id,
+            'category': getCategory(category)
+        }
+    }));
+});
+
+router.put('/:category/:id/tag', function (req, res, next) {
+    const {
+        category,
+        id
+    } = req.params;
+    res.json(Mock.mock({
+        'errorCode': 0,
+        'message': 'success',
+        'data': {
+            'id': id,
+            'category': getCategory(category)
+        }
+    }));
+});
+
+router.delete('/:category/:id', function (req, res, next) {
+    const {
+        category,
+        id
+    } = req.params;
+    res.json(Mock.mock({
+        'errorCode': 0,
+        'message': 'success',
+        'data': {
+            'id': id,
+            'category': getCategory(category)
+        }
+    }));
+});
+
+function getCategory(category) {
+    switch (category) {
+        case 'new':
+            return '新房';
+        case 'rent':
+            return '租房';
+            break;
+        case 'second':
+            return '二手房';
+    }
+}
 module.exports = router;
