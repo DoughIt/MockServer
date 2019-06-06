@@ -49,4 +49,23 @@ router.post('/api/part_a/info/:id', function (req, res, next) {
     }
   }));
 });
+
+router.get('/api/apk/latest_version', function (req, res, next) {
+  res.json(Mock.mock({
+    'errorCode': 0,
+    'message': '成功',
+    'data': {
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "url": "apk/1.0.0",
+      "issueComment": "修复了XXX"
+    }
+  }));
+});
+router.get('/api/apk/:version', function (req, res, next) {
+  const {
+    version
+  } = req.params;
+  res.download('app-debug.apk');
+});
 module.exports = router;
