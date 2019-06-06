@@ -58,7 +58,7 @@ router.get('/api/apk/latest_version', function (req, res, next) {
     'data': {
       "versionCode": 1,
       "versionName": "1.0.0",
-      "url": "apk/1.0.0",
+      "url": "apk/duoduo.apk?version=1.0.0",
       "issueComment": "修复了XXX"
     }
   }));
