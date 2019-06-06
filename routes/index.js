@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const router = express.Router();
 const Mock = require('mockjs');
@@ -62,10 +63,11 @@ router.get('/api/apk/latest_version', function (req, res, next) {
     }
   }));
 });
-router.get('/api/apk/:version', function (req, res, next) {
+router.get('/api/apk/duoduo.apk', function (req, res, next) {
   const {
     version
-  } = req.params;
-  res.download('app-debug.apk');
+  } = req.query;
+  console.log(version);
+  res.sendFile(path.resolve('routes/app-debug.apk'));
 });
 module.exports = router;
