@@ -56,10 +56,11 @@ router.get('/api/apk/latest_version', function (req, res, next) {
     'errorCode': 0,
     'message': '成功',
     'data': {
-      "versionCode": 2,
-      "versionName": "1.0.1",
-      "url": "apk/duoduo.apk?version=1.0.1",
-      "issueComment": "修复了XXX"
+      'versionCode': 2,
+      'versionName': '1.0.1',
+      'url': 'apk/duoduo.apk?version=1.0.1',
+      'issueDate': '2019-06-12',
+      'issueComment': '修复了XXX'
     }
   }));
 });
