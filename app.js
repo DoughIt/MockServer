@@ -16,7 +16,6 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -26,6 +25,8 @@ app.use('/', indexRouter); // 将路径为 / 开头的请求交给 indexRouter �
 app.use('/api/user', usersRouter); // 将路径为 /api/user 开头的请求交给 userRounter 路由中间件处理 
 app.use('/api/estate', estateRouter); // 将路径为 /api/estate 开头的请求交给 estateRouter 路由中间件处理 
 app.use('/api/ad', adRouter); // 将路径为 /api/ad 开头的请求交给 adRouter 路由中间件处理
+
+app.use(express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
