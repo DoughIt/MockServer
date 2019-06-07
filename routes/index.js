@@ -18,10 +18,10 @@ random.extend({
 });
 
 const getCommunityRoadInfo = function () {
-  return Mock.mock({  // 使用 Mock 初始化 json 数据
+  return Mock.mock({ // 使用 Mock 初始化 json 数据
     'errorCode': 0,
     'message': '成功',
-    'itemList|20-40': [{  // 定义 itemList 为 json 数组，随机生成20 - 40 条数据
+    'itemList|20-40': [{ // 定义 itemList 为 json 数组，随机生成20 - 40 条数据
       'community': '@community', // 使用自定义的 community 函数随机生成小区信息
       'road': '@road' // 使用自定义的 road 函数随机生成街道信息
     }]
@@ -73,7 +73,7 @@ router.get('/api/apk/duoduo.apk', function (req, res, next) {
     version
   } = req.query;
   console.log(version);
-  res.redirect('http://duo.darkyoung.cn:8888/apk/app-debug.apk')
+  res.redirect('/apk/app-debug.apk');
   // res.sendFile(path.resolve('routes/app-debug.apk'));
 });
 module.exports = router;
