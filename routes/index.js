@@ -73,7 +73,7 @@ router.get('/api/apk/duoduo.apk', function (req, res, next) {
     version
   } = req.query;
   console.log(version);
-  res.redirect('/apk/app-debug.apk')
+  res.redirect('http://duo.darkyoung.cn:8888/apk/app-debug.apk')
   // res.sendFile(path.resolve('routes/app-debug.apk'));
 });
 module.exports = router;
