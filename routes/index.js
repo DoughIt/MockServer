@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router();
+
 const Mock = require('mockjs');
+
 const random = Mock.Random;
 
 const roads = ['蔡伦路', '博华路', '龙阳路', '芳华路', '高科路', '花木路', '陈春路', '张衡路', '海科路', '金科路', '高科中路', '碧波路', '中科路', '学林路', '康桥路'];
@@ -14,16 +16,18 @@ random.extend({
     return this.pick(communities);
   }
 });
+
 const getCommunityRoadInfo = function () {
-  return Mock.mock({
+  return Mock.mock({  // 使用 Mock 初始化 json 数据
     'errorCode': 0,
     'message': '成功',
-    'itemList|20-40': [{
-      'community': '@community',
-      'road': '@road'
+    'itemList|20-40': [{  // 定义 itemList 为 json 数组，随机生成20 - 40 条数据
+      'community': '@community', // 使用自定义的 community 函数随机生成小区信息
+      'road': '@road' // 使用自定义的 road 函数随机生成街道信息
     }]
   });
 };
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -69,6 +73,7 @@ router.get('/api/apk/duoduo.apk', function (req, res, next) {
     version
   } = req.query;
   console.log(version);
-  res.sendFile(path.resolve('routes/app-debug.apk'));
+  res.redirect('/apk/app-debug.apk')
+  // res.sendFile(path.resolve('routes/app-debug.apk'));
 });
 module.exports = router;
