@@ -69,6 +69,8 @@ router.get('/info', (req, res, next) => {
     } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (id === undefined || id <= 0)
+        res.json(renderResult(null, 500, '课程id不能为空'))
     res.json(renderResult({
         "id": id,
         "lessonNumber": "@string('upper', 4)@string('number', 8)",
@@ -95,6 +97,8 @@ router.get('/tagList', (req, res, next) => {
     } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (lessonId === undefined || lessonId <= 0)
+        res.json(renderResult(null, 500, '课程id不能为空'))
     let total = (pageNum) * pageSize + Mock.mock('@integer(1, 5)')
     res.json(renderResult({
         "pageNum": pageNum,
@@ -120,6 +124,8 @@ router.get('/tag', (req, res, next) => {
     } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (tagName === undefined || tagName === '')
+        res.json(renderResult(null, 500, '标签名不能为空'))
     res.json(renderResult({
         "tagName": tagName,
         "positive": "@integer(5, 100)",
@@ -136,10 +142,14 @@ router.post('/tag', (req, res, next) => {
     let {
         lessonId,
         tagName,
-        isPositive
+        isPositive = true
     } = req.body
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (lessonId === undefined || lessonId <= 0)
+        res.json(renderResult(null, 500, '课程id不能为空'))
+    if (tagName === undefined || tagName === '')
+        res.json(renderResult(null, 500, '标签名不能为空'))
     res.json(renderResult(null))
 })
 
