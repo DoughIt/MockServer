@@ -137,7 +137,7 @@ router.post('/tag', (req, res, next) => {
         lessonId,
         tagName,
         isPositive
-    } = req.query
+    } = req.body
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
     res.json(renderResult(null))
