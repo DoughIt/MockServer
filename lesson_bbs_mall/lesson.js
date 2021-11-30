@@ -49,7 +49,7 @@ router.get('/lessonList', (req, res, next) => {
             "lessonNumber": "@string('upper', 4)@string('number', 8)",
             "lessonName": "《 @ctitle 》",
             "teacherName": "@cname",
-            "picture|2-5": [
+            "pictures|2-5": [
                 "@image('1080x768', @color)"
             ],
             "semester": "@semester",
@@ -74,7 +74,7 @@ router.get('/info', (req, res, next) => {
         "lessonNumber": "@string('upper', 4)@string('number', 8)",
         "lessonName": "《 @ctitle 》",
         "teacherName": "@cname",
-        "picture|2-5": [
+        "pictures|2-5": [
             "@image('1080x768', @color)"
         ],
         "semester": "@semester",
