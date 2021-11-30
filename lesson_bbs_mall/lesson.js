@@ -38,6 +38,16 @@ router.get('/lessonList', (req, res, next) => {
     } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let isQuery = (keys !== undefined && keys !== '')
+    if (isQuery) {
+        let keyList = keys.split('/')
+        random.extend({
+            key: function () {
+                return this.pick(keyList)
+            }
+        })
+    }
+
     let total = (pageNum + 2) * pageSize + Mock.mock('@integer(1, 5)')
     res.json(renderResult({
         "pageNum": pageNum,
@@ -47,8 +57,8 @@ router.get('/lessonList', (req, res, next) => {
         "list|8": [{
             "id|+1": 29,
             "lessonNumber": "@string('upper', 4)@string('number', 8)",
-            "lessonName": "《 @ctitle 》",
-            "teacherName": "@cname",
+            "lessonName": "《" + isQuery ? "@key" : "@ctitle" + "》",
+            "teacherName": isQuery ? "@key" : "@cname",
             "pictures|2-5": [
                 "@image('1080x768', @color)"
             ],
