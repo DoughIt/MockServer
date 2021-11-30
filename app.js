@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+    extended: false
 }));
 app.use(cookieParser());
 
@@ -27,25 +27,27 @@ app.use(cookieParser());
 // app.use('/api/ad', adRouter); // 将路径为 /api/ad 开头的请求交给 adRouter 路由中间件处理
 const indexRouter = require('./lesson_bbs_mall/index')
 const userRouter = require('./lesson_bbs_mall/user')
+const lessonRouter = require('./lesson_bbs_mall/lesson')
 app.use('/', indexRouter)
 app.use('/api/ums', userRouter)
+app.use('/api/lms', lessonRouter)
 
 app.use(express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

@@ -114,7 +114,7 @@ router.get('/topicList', (req, res, next) => {
             "content": "@cparagraph(2, 5)",
             "user": {
                 "id": "@integer(2, 100000)",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, @color)",
                 "username": "@cname"
             },
             "issueTime": "@datetime",
