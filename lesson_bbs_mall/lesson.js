@@ -38,7 +38,7 @@ router.get('/lessonList', (req, res, next) => {
     } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
-    let isQuery = (keys !== undefined && keys !== '')
+    let isQuery = filter === "query" && (keys !== undefined || keys !== '')
     if (isQuery) {
         let keyList = keys.split('/')
         random.extend({
