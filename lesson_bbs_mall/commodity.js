@@ -424,9 +424,6 @@ router.post('/notes', (req, res, next) => {
     } = req.body
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
-    if (id === undefined || id === '') {
-        res.json(renderResult(null, 500, '验证失败，请先选择笔记'))
-    }
     if (lessonId === undefined || picture === undefined || coverPercentage === undefined || price === undefined || unit === undefined || content === undefined) {
         res.json(renderResult(null, 500, '请指定lessonId、picture、coverPercentage、price、unit、content的值'))
     }
