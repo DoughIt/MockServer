@@ -1,4 +1,5 @@
 const express = require('express');
+const multiparty = require('multiparty')
 const router = express.Router();
 const Mock = require('mockjs');
 const random = Mock.Random;
@@ -88,24 +89,57 @@ router.get('/refreshToken', (req, res, next) => {
 })
 
 // 上传头像
-router.post('/avatar', (req, res, next) => {
+router.put('/avatar', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+
+    let form = new multiparty.Form();
+    form.parse(req, (err, fields, file) => {
+        if (file === undefined)
+            res.json(renderResult(null, 500, '请正确选择头像'))
+        res.json(renderResult({
+            'url': '@url'
+        }))
+    })
+})
+
+// 更新用户信息
+router.put('/info', (req, res, next) => {
     const {
         authorization
     } = req.headers;
     const {
-        file
+        username,
+        description
+    } = req.body
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    res.json(renderResult(null))
+})
+
+// 更新密码
+router.put('/password', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        password,
+        newPassword
     } = req.body
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
 
-    if (file === undefined)
-        res.json(renderResult(null, 500, '请正确选择头像'))
+    if (password === undefined || password === "")
+        res.json(renderResult(null, 500, '密码错误'))
 
-    res.json(renderResult({
-        'url': '@url'
-    }))
+    if (newPassword === undefined || newPassword === "")
+        res.json(renderResult(null, 500, '新密码不能为空'))
+
+    res.json(renderResult(null))
 })
-
 
 // 获取验证码
 router.get('/vCode', (req, res, next) => {

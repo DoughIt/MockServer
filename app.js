@@ -29,11 +29,13 @@ const indexRouter = require('./lesson_bbs_mall/index')
 const userRouter = require('./lesson_bbs_mall/user')
 const lessonRouter = require('./lesson_bbs_mall/lesson')
 const messageRouter = require('./lesson_bbs_mall/message')
+const commodityRouter = require('./lesson_bbs_mall/commodity')
 const sinanRouter = require('./sinan/index')
 app.use('/', indexRouter)
 app.use('/api/ums', userRouter)     // 项目管理路由
 app.use('/api/lms', lessonRouter)   // 项目管理路由
 app.use('/api/mms', messageRouter)   // 项目管理路由
+app.use('/api/cms', commodityRouter)   // 项目管理路由
 app.use('/api/sms', sinanRouter)  // 人机交互路由
 
 
