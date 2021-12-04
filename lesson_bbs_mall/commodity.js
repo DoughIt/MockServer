@@ -33,7 +33,7 @@ router.post('/ppts/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         pageNum = 3,
         pageSize = 8
@@ -102,7 +102,7 @@ router.put('/ppts/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         picture,
         chapters,
@@ -162,7 +162,7 @@ router.delete('/ppts/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
     if (id === undefined || id === '') {
@@ -179,7 +179,7 @@ router.post('/books/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         pageNum = 3,
         pageSize = 8
@@ -249,7 +249,7 @@ router.put('/books/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         picture,
         bookName,
@@ -309,7 +309,7 @@ router.delete('/books/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
     if (id === undefined || id === '') {
@@ -327,7 +327,7 @@ router.post('/notes/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         pageNum = 3,
         pageSize = 8
@@ -390,7 +390,7 @@ router.put('/notes/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     const {
         picture,
         coverPercentage,
@@ -441,7 +441,7 @@ router.delete('/notes/:id', (req, res, next) => {
     } = req.headers;
     const {
         id
-    } = req.path;
+    } = req.params;
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
     if (id === undefined || id === '') {

@@ -87,8 +87,9 @@ router.post('/msg', (req, res, next) => {
     if (receiverId === undefined) {
         res.json(renderResult(null, 500, "操作失败，请指定接受者"));
     }
-    if (content === undefined){}
+    if (content === undefined) {
         res.json(renderResult(null, 500, "操作失败，内容不能为空"));
+    }
     res.json(renderResult(null))
 })
 
