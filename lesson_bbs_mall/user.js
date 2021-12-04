@@ -27,7 +27,7 @@ router.post('/login', (req, res, next) => {
         password
     } = req.body;
     if ((studentId === undefined && openId === undefined)
-    || (studentId === '' && openId === ''))
+        || (studentId === '' && openId === ''))
         res.json(renderResult(null, 500, '操作失败，用户名不合法'))
     else if (password === undefined || password === '')
         res.json(renderResult(null, 500, '操作失败，密码为空'))
@@ -87,12 +87,56 @@ router.get('/refreshToken', (req, res, next) => {
     }))
 })
 
+// 上传头像
+router.post('/avatar', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        file
+    } = req.body
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+
+    if (file === undefined)
+        res.json(renderResult(null, 500, '请正确选择头像'))
+
+    res.json(renderResult({
+        'url': '@url'
+    }))
+})
+
+
+// 获取验证码
+router.get('/vCode', (req, res, next) => {
+    const {
+        studentId
+    } = req.query
+    if (studentId === undefined || studentId === '')
+        res.json(renderResult(null, 500, "学号不能为空"))
+    res.json(renderResult(null, 200, "操作成功，验证码已发送至" + studentId + "@fudan.edu.cn"))
+});
+
+// 验证邮箱
+router.put('/vCode', (req, res, next) => {
+    const {
+        studentId,
+        vCode
+    } = req.body
+    if (studentId === undefined || studentId === '')
+        res.json(renderResult(null, 500, "学号不能为空"))
+    if (vCode === undefined || vCode.length !== 4)
+        res.json(renderResult(null, 500, "验证码是4位数字"))
+    res.json(renderResult(null))
+});
+
+
 // 讨论区
 router.get('/topicList', (req, res, next) => {
     const {
         authorization
     } = req.headers;
-    let {
+    const {
         pageNum = 3,
         pageSize = 8,
         lessonId,
