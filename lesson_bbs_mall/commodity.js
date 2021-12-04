@@ -27,7 +27,7 @@ const renderResult = (data, code = 200, message = '操作成功') => {
 }
 
 //ppt
-router.post('/ppts/:id', (req, res, next) => {
+router.get('/ppts/:id', (req, res, next) => {
     const {
         authorization
     } = req.headers;
@@ -173,7 +173,7 @@ router.delete('/ppts/:id', (req, res, next) => {
 
 
 //book
-router.post('/books/:id', (req, res, next) => {
+router.get('/books/:id', (req, res, next) => {
     const {
         authorization
     } = req.headers;
@@ -321,7 +321,7 @@ router.delete('/books/:id', (req, res, next) => {
 
 
 //note
-router.post('/notes/:id', (req, res, next) => {
+router.get('/notes/:id', (req, res, next) => {
     const {
         authorization
     } = req.headers;
