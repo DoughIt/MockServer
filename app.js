@@ -28,7 +28,7 @@ app.use(cookieParser());
 const indexRouter = require('./lesson_bbs_mall/index')
 const userRouter = require('./lesson_bbs_mall/user')
 const lessonRouter = require('./lesson_bbs_mall/lesson')
-const messageRouter = require('/lesson_bbs_mall/message')
+const messageRouter = require('./lesson_bbs_mall/message')
 const sinanRouter = require('./sinan/index')
 app.use('/', indexRouter)
 app.use('/api/ums', userRouter)     // 项目管理路由
