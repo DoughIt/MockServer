@@ -25,7 +25,46 @@ const renderResult = (data, code = 200, message = '操作成功') => {
         'data': data
     })
 }
-
+router.get('/ppts', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 2) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 3,
+        "total": total,
+        "list|8": [{
+            'id|+1': '@integer(2, 1000000)',
+            'pictures|2-5': [{
+                'url': '@image(1024x768, \'#FF6600\')'
+            }],
+            'chapters': '@integer(1, 20)',
+            'paperSize': '@paperSize',
+            'singlePrint': '@boolean',
+            'newDegree': '@newDegree',
+            'price': '@integer(0, 100)',
+            'unit': '@unit',
+            'content': '@csentence(2, 4)',
+            'seller': {
+                'id': '@integer(2, 100000)',
+                "username": "@cname",
+                "avatar": "@image(80x80, '#FF6600')",
+            },
+            'lesson': {
+                'id': '@integer(2, 1000)',
+                'lessonName': '@ctitle'
+            }
+        }]
+    }))
+})
 //ppt
 router.get('/ppts/:id', (req, res, next) => {
     const {
@@ -34,43 +73,8 @@ router.get('/ppts/:id', (req, res, next) => {
     const {
         id
     } = req.params;
-    const {
-        pageNum = 3,
-        pageSize = 8
-    } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
-    if (id === undefined || id === '') {
-        let total = (pageNum + 2) * pageSize + Mock.mock('@integer(1, 5)')
-        res.json(renderResult({
-            "pageNum": pageNum,
-            "pageSize": pageSize,
-            "totalPage": pageNum + 3,
-            "total": total,
-            "list|8": [{
-                'id|+1': '@integer(2, 1000000)',
-                'pictures|2-5': [{
-                    'url': '@image(1024x768, \'#FF6600\')'
-                }],
-                'chapters': '@integer(1, 20)',
-                'paperSize': '@paperSize',
-                'singlePrint': '@boolean',
-                'newDegree': '@newDegree',
-                'price': '@integer(0, 100)',
-                'unit': '@unit',
-                'content': '@csentence(2, 4)',
-                'seller': {
-                    'id': '@integer(2, 100000)',
-                    "username": "@cname",
-                    "avatar": "@image(80x80, '#FF6600')",
-                },
-                'lesson': {
-                    'id': '@integer(2, 1000)',
-                    'lessonName': '@ctitle'
-                }
-            }]
-        }))
-    }
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
@@ -173,6 +177,49 @@ router.delete('/ppts/:id', (req, res, next) => {
 
 
 //book
+router.get('/books', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 2,
+        "total": total,
+        "list|8": [{
+            'id|+1': '@integer(2, 1000000)',
+            'pictures|2-5': [{
+                'url': '@image(1024x768, \'#FF6600\')'
+            }],
+            'bookName': '《 @ctitle 》',
+            'author': '@cname',
+            'publisher': '@ctitle',
+            'newDegree': '@newDegree',
+            'price': '@integer(0, 100)',
+            'unit': '@unit',
+            'content': '@csentence(2, 4)',
+            'seller': {
+                'id': '@integer(2, 100000)',
+                "username": "@cname",
+                "avatar": "@image(80x80, '#FF6600')",
+            },
+            'lesson': {
+                'id': '@integer(2, 1000)',
+                'lessonName': '@ctitle'
+            }
+        }]
+    }))
+
+})
+
+//book
 router.get('/books/:id', (req, res, next) => {
     const {
         authorization
@@ -180,43 +227,8 @@ router.get('/books/:id', (req, res, next) => {
     const {
         id
     } = req.params;
-    const {
-        pageNum = 3,
-        pageSize = 8
-    } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
-    if (id === undefined || id === '') {
-        let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
-        res.json(renderResult({
-            "pageNum": pageNum,
-            "pageSize": pageSize,
-            "totalPage": pageNum + 2,
-            "total": total,
-            "list|8": [{
-                'id|+1': '@integer(2, 1000000)',
-                'pictures|2-5': [{
-                    'url': '@image(1024x768, \'#FF6600\')'
-                }],
-                'bookName': '《 @ctitle 》',
-                'author': '@cname',
-                'publisher': '@ctitle',
-                'newDegree': '@newDegree',
-                'price': '@integer(0, 100)',
-                'unit': '@unit',
-                'content': '@csentence(2, 4)',
-                'seller': {
-                    'id': '@integer(2, 100000)',
-                    "username": "@cname",
-                    "avatar": "@image(80x80, '#FF6600')",
-                },
-                'lesson': {
-                    'id': '@integer(2, 1000)',
-                    'lessonName': '@ctitle'
-                }
-            }]
-        }))
-    }
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
@@ -319,6 +331,44 @@ router.delete('/books/:id', (req, res, next) => {
 })
 
 
+//note
+router.get('/notes', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 2,
+        "total": total,
+        "list|8": [{
+            'id|+1': '@integer(2, 1000000)',
+            'pictures|2-5': [{
+                'url': '@image(1024x768, \'#FF6600\')'
+            }],
+            'coverPercentage': '@integer(0, 100) %',
+            'price': '@integer(0, 100)',
+            'unit': '@unit',
+            'content': '@csentence(2, 4)',
+            'seller': {
+                'id': '@integer(2, 100000)',
+                "username": "@cname",
+                "avatar": "@image(80x80, '#FF6600')",
+            },
+            'lesson': {
+                'id': '@integer(2, 1000)',
+                'lessonName': '@ctitle'
+            }
+        }]
+    }))
+})
 
 //note
 router.get('/notes/:id', (req, res, next) => {
@@ -328,40 +378,9 @@ router.get('/notes/:id', (req, res, next) => {
     const {
         id
     } = req.params;
-    const {
-        pageNum = 3,
-        pageSize = 8
-    } = req.query
     if (authorization === undefined || authorization === '')
         res.json(renderResult(null, 500, '验证失败，token已过期'))
-    if (id === undefined || id === '') {
-        let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
-        res.json(renderResult({
-            "pageNum": pageNum,
-            "pageSize": pageSize,
-            "totalPage": pageNum + 2,
-            "total": total,
-            "list|8": [{
-                'id|+1': '@integer(2, 1000000)',
-                'pictures|2-5': [{
-                    'url': '@image(1024x768, \'#FF6600\')'
-                }],
-                'coverPercentage': '@integer(0, 100) %',
-                'price': '@integer(0, 100)',
-                'unit': '@unit',
-                'content': '@csentence(2, 4)',
-                'seller': {
-                    'id': '@integer(2, 100000)',
-                    "username": "@cname",
-                    "avatar": "@image(80x80, '#FF6600')",
-                },
-                'lesson': {
-                    'id': '@integer(2, 1000)',
-                    'lessonName': '@ctitle'
-                }
-            }]
-        }))
-    }
+
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
