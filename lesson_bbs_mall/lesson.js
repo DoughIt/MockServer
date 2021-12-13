@@ -54,7 +54,7 @@ router.get('/lessonList', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 3,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             "id|+1": 29,
             "lessonNumber": "@string('upper', 4)@string('number', 8)",
             "lessonName": "《" + isQuery ? "@key" : "@ctitle" + "》",
@@ -115,7 +115,7 @@ router.get('/tagList', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 1,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             "tagName": "@cword(2, 4)",
             "positive": "@integer(5, 100)",
             "negative": "@integer(0, 20)"

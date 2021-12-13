@@ -41,7 +41,7 @@ router.get('/ppts', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 3,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
                 'url': '@image(1024x768, \'#FF6600\')'
@@ -193,7 +193,7 @@ router.get('/books', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 2,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
                 'url': '@image(1024x768, \'#FF6600\')'
@@ -348,7 +348,7 @@ router.get('/notes', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 2,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
                 'url': '@image(1024x768, \'#FF6600\')'

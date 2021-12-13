@@ -24,13 +24,13 @@ const renderResult = (data, code = 200, message = '操作成功') => {
 router.post('/login', (req, res, next) => {
     const {
         studentId,
-        openId,
+        miniCode,
         password
     } = req.body;
-    if ((studentId === undefined && openId === undefined)
-        || (studentId === '' && openId === ''))
-        res.json(renderResult(null, 500, '操作失败，用户名不合法'))
-    else if (password === undefined || password === '')
+    if ((studentId === undefined && miniCode === undefined)
+        || (studentId === '' && miniCode === ''))
+        res.json(renderResult(null, 500, '操作失败，用户名不合法或code为空'))
+    else if (miniCode === undefined && password === undefined || password === '')
         res.json(renderResult(null, 500, '操作失败，密码为空'))
     res.json(renderResult({
         'tokenHead': '@tokenHead',
@@ -42,13 +42,12 @@ router.post('/login', (req, res, next) => {
 router.post('/register', (req, res, next) => {
     const {
         studentId,
-        openId,
         password,
         nickname
     } = req.body;
-    if (studentId === undefined && openId === undefined)
+    if (studentId === undefined)
         res.json(renderResult(null, 500, '操作失败，用户名不合法'))
-    else if (password === undefined || openId === '')
+    else if (password === undefined)
         res.json(renderResult(null, 500, '操作失败，密码为空'))
     res.json(renderResult(null))
 });
@@ -185,7 +184,7 @@ router.get('/topicList', (req, res, next) => {
         "pageSize": pageSize,
         "totalPage": pageNum + 3,
         "total": total,
-        "list|8": [{
+        ["list|" + pageSize]: [{
             "id|+1": 245,
             "parentId": topicId === undefined ? null : topicId,
             "title": "@ctitle",

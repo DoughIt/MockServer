@@ -38,7 +38,7 @@ router.get('/msgList', (req, res, next) => {
             "pageSize": pageSize,
             "totalPage": pageNum + 2,
             "total": total,
-            "list|8": [{
+            ["list|" + pageSize]: [{
                 "sender": {
                     "id|+3": 36,
                     "avatar": "@image(80x80, @color)",
@@ -60,7 +60,7 @@ router.get('/msgList', (req, res, next) => {
             "pageSize": pageSize,
             "totalPage": pageNum + 2,
             "total": total,
-            "list|8": [{
+            ["list|" + pageSize]: [{
                 "id": "@integer(2, 100000)",
                 "senderId": userId,
                 "receiverId": 3,
