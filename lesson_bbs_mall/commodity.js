@@ -492,6 +492,7 @@ router.get('/commodities', (req, res, next) => {
             'pictures|2-5': [{
                 'url': '@image(1024x768, \'#FF6600\')'
             }],
+            "name": "@csentence(2,4)",
             "author": "@cname",
             "publisher": "@csentence",
             "newDegree": "@newDegree",
@@ -510,6 +511,84 @@ router.get('/commodities', (req, res, next) => {
             },
             'lesson': {
                 'id': lessonId === undefined ? '@integer(2, 1000)' : lessonId,
+                'lessonName': '@ctitle'
+            }
+        }]
+    }))
+})
+
+
+//新增收藏
+router.post('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        id
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (id === undefined || id === '')
+        res.json(renderResult(null, 500, '请选择收藏商品id'))
+    res.json(renderResult({}))
+})
+
+//取消收藏
+router.delete('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        id
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (id === undefined || id === '')
+        res.json(renderResult(null, 500, '请选择收藏商品id'))
+    res.json(renderResult({}))
+})
+
+//我的收藏
+router.post('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8,
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 2,
+        "total": total,
+        ["list|" + pageSize]: [{
+            'commodityId|+1': '@integer(2, 1000000)',
+            'pictures|2-5': [{
+                'url': '@image(1024x768, \'#FF6600\')'
+            }],
+            "name": "@csentence(2,4)",
+            "author": "@cname",
+            "publisher": "@csentence",
+            "newDegree": "@newDegree",
+            "singlePrint": "@boolean",
+            "dealMethod": "@integer(0,3)",
+            "chapters": "@integer(0,20)",
+            "paperSize": "@paperSize",
+            'coverPercentage': '@integer(0, 100) %',
+            'price': '@integer(0, 100)',
+            'unit': '@unit',
+            'content': '@csentence(2, 4)',
+            'seller': {
+                'id': '@integer(2, 100000)',
+                "username": "@cname",
+                "avatar": "@image(80x80, '#FF6600')",
+            },
+            'lesson': {
+                'id': '@integer(2, 1000)',
                 'lessonName': '@ctitle'
             }
         }]

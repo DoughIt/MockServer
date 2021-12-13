@@ -201,6 +201,11 @@ router.get('/topicList', (req, res, next) => {
                 "parentId": 245,
                 "title": "@ctitle",
                 "content": "@cparagraph(2, 5)",
+                "parentUser": {
+                    "id": "@integer(2, 100000)",
+                    "avatar": "@image(80x80, '#FF6600')",
+                    "username": "@cname"
+                },
                 "user": {
                     "id": "@integer(2, 100000)",
                     "avatar": "@image(80x80, '#FF6600')",
@@ -239,6 +244,11 @@ router.get('/myTopicList', (req, res, next) => {
             "goodsId":null,
             "title": "@ctitle",
             "content": "@cparagraph(2, 5)",
+            "parentUser": {
+                "id": "@integer(2, 100000)",
+                "avatar": "@image(80x80, '#FF6600')",
+                "username": "@cname"
+            },
             "user": {
                 "id": "@integer(2, 100000)",
                 "avatar": "@image(80x80, @color)",
@@ -273,6 +283,11 @@ router.post('/topic', (req, res, next) => {
         "parentId": topicId === undefined ? null : topicId,
         "title": "@ctitle",
         "content": "@cparagraph(2, 5)",
+        "parentUser": {
+            "id": "@integer(2, 100000)",
+            "avatar": "@image(80x80, '#FF6600')",
+            "username": "@cname"
+        },
         "user": {
             "id": "@integer(2, 100000)",
             "avatar": "@image(80x80, '#FF6600')",
