@@ -466,4 +466,54 @@ router.delete('/notes/:id', (req, res, next) => {
     res.json(renderResult(null))
 })
 
+
+//已出售商品
+router.get('/commodities', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8,
+        isMine,
+        isSold,
+        lessonId
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 2,
+        "total": total,
+        ["list|" + pageSize]: [{
+            'commodityId|+1': '@integer(2, 1000000)',
+            'pictures|2-5': [{
+                'url': '@image(1024x768, \'#FF6600\')'
+            }],
+            "author": "@cname",
+            "publisher": "@csentence",
+            "newDegree": "@newDegree",
+            "singlePrint": "@boolean",
+            "dealMethod": "@integer(0,3)",
+            "chapters": "@integer(0,20)",
+            "paperSize": "@paperSize",
+            'coverPercentage': '@integer(0, 100) %',
+            'price': '@integer(0, 100)',
+            'unit': '@unit',
+            'content': '@csentence(2, 4)',
+            'seller': {
+                'id': '@integer(2, 100000)',
+                "username": "@cname",
+                "avatar": "@image(80x80, '#FF6600')",
+            },
+            'lesson': {
+                'id': lessonId === undefined ? '@integer(2, 1000)' : lessonId,
+                'lessonName': '@ctitle'
+            }
+        }]
+    }))
+})
+
 module.exports = router;
