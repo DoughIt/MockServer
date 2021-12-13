@@ -141,7 +141,7 @@ router.put('/password', (req, res, next) => {
 })
 
 // 获取验证码
-router.get('/vCode', (req, res, next) => {
+router.get('/authCode', (req, res, next) => {
     const {
         studentId
     } = req.query
@@ -151,7 +151,7 @@ router.get('/vCode', (req, res, next) => {
 });
 
 // 验证邮箱
-router.put('/vCode', (req, res, next) => {
+router.put('/authCode', (req, res, next) => {
     const {
         studentId,
         vCode
