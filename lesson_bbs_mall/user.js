@@ -214,6 +214,44 @@ router.get('/topicList', (req, res, next) => {
     }))
 })
 
+
+// 我的帖子
+router.get('/myTopicList', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 2) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 3,
+        "total": total,
+        ["list|" + pageSize]: [{
+            "id|+1": 245,
+            "parentId": null,
+            "lessonId": "@integer(2, 100000)",
+            "goodsId":null,
+            "title": "@ctitle",
+            "content": "@cparagraph(2, 5)",
+            "user": {
+                "id": "@integer(2, 100000)",
+                "avatar": "@image(80x80, @color)",
+                "username": "@cname"
+            },
+            "issueTime": "@datetime",
+            "state": "@integer(0, 1)",
+            "children": null
+        }]
+    }))
+})
+
+
 // 添加帖子
 router.post('/topic', (req, res, next) => {
     const {
