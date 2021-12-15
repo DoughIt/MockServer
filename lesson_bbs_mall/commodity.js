@@ -549,7 +549,7 @@ router.delete('/favorite', (req, res, next) => {
 })
 
 //我的收藏
-router.post('/favorite', (req, res, next) => {
+router.get('/favorite', (req, res, next) => {
     const {
         authorization
     } = req.headers;

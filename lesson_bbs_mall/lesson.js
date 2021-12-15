@@ -163,4 +163,65 @@ router.post('/tag', (req, res, next) => {
     res.json(renderResult(null))
 })
 
+
+//新增收藏
+router.post('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        id
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (id === undefined || id === '')
+        res.json(renderResult(null, 500, '请选择收藏商品id'))
+    res.json(renderResult({}))
+})
+
+//取消收藏
+router.delete('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        id
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    if (id === undefined || id === '')
+        res.json(renderResult(null, 500, '请选择收藏课程id'))
+    res.json(renderResult({}))
+})
+
+//我的收藏
+router.get('/favorite', (req, res, next) => {
+    const {
+        authorization
+    } = req.headers;
+    const {
+        pageNum = 3,
+        pageSize = 8,
+    } = req.query
+    if (authorization === undefined || authorization === '')
+        res.json(renderResult(null, 500, '验证失败，token已过期'))
+    let total = (pageNum + 1) * pageSize + Mock.mock('@integer(1, 5)')
+    res.json(renderResult({
+        "pageNum": pageNum,
+        "pageSize": pageSize,
+        "totalPage": pageNum + 2,
+        "total": total,
+        ["list|" + pageSize]: [{
+            "id": '@integer(2, 1000000)',
+            "lessonNumber": "@string('upper', 4)@string('number', 8)",
+            "lessonName": "《 @ctitle 》",
+            "teacherName": "@cname",
+            "pictures|2-5": [
+                "@image('1080x768', @color)"
+            ],
+            "semester": "@semester",
+            "credit": "@credit"
+        }]
+    }))
+})
 module.exports = router;
