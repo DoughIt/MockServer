@@ -41,7 +41,7 @@ router.get('/msgList', (req, res, next) => {
             ["list|" + pageSize]: [{
                 "sender": {
                     "id|+3": 36,
-                    "avatar": "@image(80x80, @color)",
+                    "avatar": "@image(80x80, #@color)",
                     "username": "@cname"
                 },
                 "last_message": {

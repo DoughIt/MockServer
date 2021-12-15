@@ -60,7 +60,7 @@ router.get('/lessonList', (req, res, next) => {
             "lessonName": "《" + isQuery ? "@key" : "@ctitle" + "》",
             "teacherName": isQuery ? "@key" : "@cname",
             "pictures|2-5": [
-                "@image('1080x768', @color)"
+                "@image(1080x768, #@color)"
             ],
             "semester": "@semester",
             "credit": "@credit"
@@ -87,7 +87,7 @@ router.get('/info', (req, res, next) => {
         "lessonName": "《 @ctitle 》",
         "teacherName": "@cname",
         "pictures|2-5": [
-            "@image('1080x768', @color)"
+            "@image(1080x768, #@color)"
         ],
         "semester": "@semester",
         "credit": "@credit"
@@ -217,7 +217,7 @@ router.get('/favorite', (req, res, next) => {
             "lessonName": "《 @ctitle 》",
             "teacherName": "@cname",
             "pictures|2-5": [
-                "@image('1080x768', @color)"
+                "@image(1080x768, #@color)"
             ],
             "semester": "@semester",
             "credit": "@credit"

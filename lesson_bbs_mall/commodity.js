@@ -44,7 +44,7 @@ router.get('/ppts', (req, res, next) => {
         ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
-                'url': '@image(1024x768, \'#FF6600\')'
+                'url': '@image(1024x768, #@color)'
             }],
             'chapters': '@integer(1, 20)',
             'paperSize': '@paperSize',
@@ -56,7 +56,7 @@ router.get('/ppts', (req, res, next) => {
             'seller': {
                 'id': '@integer(2, 100000)',
                 "username": "@cname",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, #@color)",
             },
             'lesson': {
                 'id': '@integer(2, 1000)',
@@ -78,7 +78,7 @@ router.get('/ppts/:id', (req, res, next) => {
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
-            'url': '@image(1024x768, \'#FF6600\')'
+            'url': '@image(1024x768,#@color)'
         }],
         'chapters': '@integer(1, 20)',
         'paperSize': '@paperSize',
@@ -90,7 +90,7 @@ router.get('/ppts/:id', (req, res, next) => {
         'seller': {
             'id': '@integer(2, 100000)',
             "username": "@cname",
-            "avatar": "@image(80x80, '#FF6600')",
+            "avatar": "@image(80x80, #@color)",
         },
         'lesson': {
             'id': '@integer(2, 1000)',
@@ -196,7 +196,7 @@ router.get('/books', (req, res, next) => {
         ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
-                'url': '@image(1024x768, \'#FF6600\')'
+                'url': '@image(1024x768, #@color)'
             }],
             'bookName': '《 @ctitle 》',
             'author': '@cname',
@@ -208,7 +208,7 @@ router.get('/books', (req, res, next) => {
             'seller': {
                 'id': '@integer(2, 100000)',
                 "username": "@cname",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, #@color)",
             },
             'lesson': {
                 'id': '@integer(2, 1000)',
@@ -232,7 +232,7 @@ router.get('/books/:id', (req, res, next) => {
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
-            'url': '@image(1024x768, \'#FF6600\')'
+            'url': '@image(1024x768, #@color)'
         }],
         'bookName': '《 @ctitle 》',
         'author': '@cname',
@@ -244,7 +244,7 @@ router.get('/books/:id', (req, res, next) => {
         'seller': {
             'id': '@integer(2, 100000)',
             "username": "@cname",
-            "avatar": "@image(80x80, '#FF6600')",
+            "avatar": "@image(80x80, #@color)",
         },
         'lesson': {
             'id': '@integer(2, 1000)',
@@ -351,7 +351,7 @@ router.get('/notes', (req, res, next) => {
         ["list|" + pageSize]: [{
             'id|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
-                'url': '@image(1024x768, \'#FF6600\')'
+                'url': '@image(1024x768, #@color)'
             }],
             'coverPercentage': '@integer(0, 100) %',
             'price': '@integer(0, 100)',
@@ -360,7 +360,7 @@ router.get('/notes', (req, res, next) => {
             'seller': {
                 'id': '@integer(2, 100000)',
                 "username": "@cname",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, #@color)",
             },
             'lesson': {
                 'id': '@integer(2, 1000)',
@@ -384,7 +384,7 @@ router.get('/notes/:id', (req, res, next) => {
     res.json(renderResult({
         'id': id,
         'pictures|2-5': [{
-            'url': '@image(1024x768, \'#FF6600\')'
+            'url': '@image(1024x768, #@color)'
         }],
         'coverPercentage': '@integer(0, 100) %',
         'price': '@integer(0, 100)',
@@ -393,7 +393,7 @@ router.get('/notes/:id', (req, res, next) => {
         'seller': {
             'id': '@integer(2, 100000)',
             "username": "@cname",
-            "avatar": "@image(80x80, '#FF6600')",
+            "avatar": "@image(80x80, #@color)",
         },
         'lesson': {
             'id': '@integer(2, 1000)',
@@ -490,7 +490,7 @@ router.get('/commodities', (req, res, next) => {
         ["list|" + pageSize]: [{
             'commodityId|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
-                'url': '@image(1024x768, \'#FF6600\')'
+                'url': '@image(1024x768, #@color)'
             }],
             "name": "@csentence(2,4)",
             "author": "@cname",
@@ -507,7 +507,7 @@ router.get('/commodities', (req, res, next) => {
             'seller': {
                 'id': '@integer(2, 100000)',
                 "username": "@cname",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, #@color)",
             },
             'lesson': {
                 'id': lessonId === undefined ? '@integer(2, 1000)' : lessonId,
@@ -568,7 +568,7 @@ router.get('/favorite', (req, res, next) => {
         ["list|" + pageSize]: [{
             'commodityId|+1': '@integer(2, 1000000)',
             'pictures|2-5': [{
-                'url': '@image(1024x768, \'#FF6600\')'
+                'url': '@image(1024x768, #@color)'
             }],
             "name": "@csentence(2,4)",
             "author": "@cname",
@@ -585,7 +585,7 @@ router.get('/favorite', (req, res, next) => {
             'seller': {
                 'id': '@integer(2, 100000)',
                 "username": "@cname",
-                "avatar": "@image(80x80, '#FF6600')",
+                "avatar": "@image(80x80, #@color)",
             },
             'lesson': {
                 'id': '@integer(2, 1000)',
