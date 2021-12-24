@@ -120,7 +120,9 @@ router.get('/tagList', (req, res, next) => {
         ["list|" + pageSize]: [{
             "tagName": "@cword(2, 4)",
             "positive": "@integer(5, 100)",
-            "negative": "@integer(0, 20)"
+            "negative": "@integer(0, 20)",
+            "positiveSelected": "@boolean",
+            "negativeSelected": "@boolean"
         }]
     }))
 })
